@@ -4,10 +4,10 @@ This script will read the input data and preprocess it. Also, it will covert int
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from nltk.corpus import stopwords
-from typing import List
+from typing import List, Tuple
 
 
-def read_data(train_files: List, test_files: List):
+def read_data(train_files: List, test_files: List) -> Tuple[pd.Dataframe, pd.Dataframe]:
     """
     Reads the csv data into Pandas dataframe
 
@@ -30,7 +30,7 @@ def read_data(train_files: List, test_files: List):
     return train_data, test_data
 
 
-def build_ngram_features(train_data: pd.Dataframe):
+def build_ngram_features(train_data: pd.Dataframe) -> CountVectorizer:
     """
     Initializes CountVectorizer
 

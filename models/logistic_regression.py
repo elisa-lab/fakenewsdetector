@@ -4,6 +4,7 @@ from sklearn.linear_model import LogisticRegression
 import joblib
 from pathlib import Path
 from sklearn.metrics import classification_report
+from typing import List
 
 
 class LogisticRegressionClassifier(Classifier):
@@ -34,13 +35,15 @@ class LogisticRegressionClassifier(Classifier):
     def add_train_file(self, train_file: Path) -> None:
         """
         Adds a train file to the train file list
+
         :param train_file: Path of the train file
         """
         self.train_files.append(train_file)
 
-    def add_test_file(self, test_file) -> None:
+    def add_test_file(self, test_file: Path) -> None:
         """
         Adds a test file to the test file list
+
         :param test_file: Path of the test file
         """
         self.test_files.append(test_file)
@@ -83,18 +86,19 @@ class LogisticRegressionClassifier(Classifier):
         """
         Loads the trained model
 
-        :param model_path:
-        :return:
+        :param model_path: Path of the dictionary from where the model will be loaded
         """
         self.model = joblib.load(Path(model_path / 'lr.joblib.pkl'))
 
-    def predict_model(self) -> None:
+    def predict_model(self) -> List:
         """
         Predicts the output of the test data
-        :return:
+
+        :return: Returns predictions on the test data by the model
         """
         features = self.vectorizer.transform(self.test_data['post'])
         predictions = self.model.predict(features)
+
         return predictions
 
     def calculate_accuracy(self) -> None:

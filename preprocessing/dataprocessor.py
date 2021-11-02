@@ -9,10 +9,11 @@ from typing import List
 
 def read_data(train_files: List, test_files: List):
     """
+    Reads the csv data into Pandas dataframe
 
-    :param train_files:
-    :param test_files:
-    :return:
+    :param train_files: List of train files
+    :param test_files: List of test files
+    :return: Returns two dataframes (train and test)
     """
     train_data = []
     for train_file in train_files:
@@ -31,9 +32,10 @@ def read_data(train_files: List, test_files: List):
 
 def build_ngram_features(train_data):
     """
+    Initializes CountVectorizer
 
-    :param train_data:
-    :return:
+    :param train_data: Train data to use in CountVectorizer
+    :return: Returns an instance of CountVectorizer
     """
     final_stopwords_list = stopwords.words('french')
     vectorizer = CountVectorizer(analyzer='word', ngram_range=(1, 3), stop_words=final_stopwords_list,

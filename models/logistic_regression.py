@@ -53,7 +53,7 @@ class LogisticRegressionClassifier(Classifier):
         self.train_data = train_data
         self.test_data = test_data
 
-    def prepare_data(self) ->:
+    def prepare_data(self) -> None:
         """
         Extracts the features from the dataset (ngram and more)
         """

@@ -30,7 +30,7 @@ def read_data(train_files: List, test_files: List):
     return train_data, test_data
 
 
-def build_ngram_features(train_data):
+def build_ngram_features(train_data: pd.Dataframe):
     """
     Initializes CountVectorizer
 

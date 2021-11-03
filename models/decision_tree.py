@@ -6,9 +6,10 @@ import joblib
 from pathlib import Path
 from sklearn.metrics import classification_report
 from typing import List
+import operator
 
 
-class DecisionTreeClassifier(Classifier):
+class DTClassifier(Classifier):
 
     def __init__(self):
         self.train_files = []
@@ -62,6 +63,9 @@ class DecisionTreeClassifier(Classifier):
         """
         self.model = DecisionTreeClassifier()
         self.model.fit(self.features, self.labels)
+        feature_importance = {feature_name: self.model.feature_importances_[i] for i, feature_name in
+         enumerate(self.vectorizer.get_feature_names())}
+        self.sorted_feature_importance = sorted(feature_importance.items(), key=operator.itemgetter(1), reverse=True)
 
     def save_model(self, model_path: Path) -> None:
         """

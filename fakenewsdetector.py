@@ -2,6 +2,9 @@ from pathlib import Path
 
 from models.logistic_regression import LogisticRegressionClassifier
 
+from models.naive_bayes import NaiveBayesClassifier
+
+
 if __name__=='__main__':
     # setting data paths
     train_path = Path('datafiles/datafake_train.csv')
@@ -29,4 +32,28 @@ if __name__=='__main__':
 
     # calculate accuracy on the test data
     lr_model.calculate_accuracy()
+
+    # initialiaze the class
+    nb_model = NaiveBayesClassifier()
+
+    # adding the train and test files to the model
+    nb_model.add_train_file(train_path)
+    nb_model.add_test_file(test_path)
+
+    # loading the data from the files.
+    nb_model.load_data()
+
+    # extracting features from the data
+    nb_model.prepare_data()
+
+    # training the model using extracted features and labels
+    nb_model.train_model()
+
+    nb_model.save_model(model_path)
+    nb_model.load_model(model_path)
+
+    # calculate accuracy on the test data
+    nb_model.calculate_accuracy()
+
+
 

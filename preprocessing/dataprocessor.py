@@ -7,7 +7,7 @@ from nltk.corpus import stopwords
 from typing import List, Tuple
 
 
-def read_data(train_files: List, test_files: List) -> Tuple[pd.Dataframe, pd.Dataframe]:
+def read_data(train_files: List, test_files: List) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """
     Reads the csv data into Pandas dataframe
 
@@ -30,7 +30,7 @@ def read_data(train_files: List, test_files: List) -> Tuple[pd.Dataframe, pd.Dat
     return train_data, test_data
 
 
-def build_ngram_features(train_data: pd.Dataframe) -> CountVectorizer:
+def build_ngram_features(train_data: pd.DataFrame) -> CountVectorizer:
     """
     Initializes CountVectorizer
 

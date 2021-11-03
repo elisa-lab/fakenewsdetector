@@ -58,49 +58,44 @@ class NaiveBayesClassifier(Classifier):
         self.labels = self.train_data['fake']
 
     def train_model(self) -> None:
-
         """
         Trains a model using the prepared dataset
         """
         self.model = GaussianNB()
         self.model.fit(self.features, self.labels)
 
-
     def save_model(self, model_path: Path) -> None:
         """
-               Saves the trained model
+       Saves the trained model
 
-               :param model_path: Path of the dictionary where the model will be saved
-               """
+       :param model_path: Path of the dictionary where the model will be saved
+        """
 
         joblib.dump(self.model, Path(model_path / 'lr.joblib.pkl'), compress=9)
 
-
     def load_model(self, model_path: Path) -> None:
         """
-                Loads the trained model
+        Loads the trained model
 
-                :param model_path: Path of the dictionary from where the model will be loaded
-                """
+        :param model_path: Path of the dictionary from where the model will be loaded
+        """
         self.model = joblib.load(Path(model_path / 'lr.joblib.pkl'))
-
 
     def predict_model(self) -> List:
         """
-                Predicts the output of the test data
+        Predicts the output of the test data
 
-                :return: Returns predictions on the test data by the model
-                """
+        :return: Returns predictions on the test data by the model
+        """
         features = self.vectorizer.transform(self.test_data['post']).toarray()
         predictions = self.model.predict(features)
 
         return predictions
 
-
     def calculate_accuracy(self) -> None:
         """
-               Calculate accuracy on the test data
-               """
+        Calculate accuracy on the test data
+        """
         y_pred = self.predict_model()
         y_true = self.test_data['fake']
 

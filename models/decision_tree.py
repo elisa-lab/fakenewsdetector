@@ -1,6 +1,6 @@
 from models.supervised_models import Classifier
 from preprocessing.dataprocessor import read_data, build_ngram_features
-from sklearn.naive_bayes import GaussianNB
+from sklearn.tree import DecisionTreeClassifier
 
 import joblib
 from pathlib import Path
@@ -8,7 +8,7 @@ from sklearn.metrics import classification_report
 from typing import List
 
 
-class NaiveBayesClassifier(Classifier):
+class DecisionTreeClassifier(Classifier):
 
     def __init__(self):
         self.train_files = []
@@ -60,7 +60,7 @@ class NaiveBayesClassifier(Classifier):
         """
         Trains a model using the prepared dataset
         """
-        self.model = GaussianNB()
+        self.model = DecisionTreeClassifier()
         self.model.fit(self.features, self.labels)
 
     def save_model(self, model_path: Path) -> None:

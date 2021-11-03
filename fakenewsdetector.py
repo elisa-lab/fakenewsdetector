@@ -1,8 +1,8 @@
 from pathlib import Path
 
 from models.logistic_regression import LogisticRegressionClassifier
-
 from models.naive_bayes import NaiveBayesClassifier
+from models.decision_tree import DecisionTreeClassifier
 
 
 if __name__=='__main__':
@@ -54,6 +54,29 @@ if __name__=='__main__':
 
     # calculate accuracy on the test data
     nb_model.calculate_accuracy()
+
+
+    # initialiaze the class
+    dc_model = DecisionTreeClassifier()
+
+    # adding the train and test files to the model
+    dc_model.add_train_file(train_path)
+    dc_model.add_test_file(test_path)
+
+    # loading the data from the files.
+    dc_model.load_data()
+
+    # extracting features from the data
+    dc_model.prepare_data()
+
+    # training the model using extracted features and labels
+    dc_model.train_model()
+
+    dc_model.save_model(model_path)
+    dc_model.load_model(model_path)
+
+    # calculate accuracy on the test data
+    dc_model.calculate_accuracy()
 
 
 

@@ -10,7 +10,6 @@ import operator
 
 
 class DTClassifier(Classifier):
-
     def __init__(self):
         self.train_files = []
         self.test_files = []

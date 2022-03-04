@@ -96,7 +96,7 @@ class LogisticRegressionClassifier(Classifier):
 
         :return: Returns predictions on the test data by the model
         """
-        features = self.vectorizer.transform(self.test_data['post'])
+        features = self.vectorizer.transform(self.test_data['post']).toarray()
         predictions = self.model.predict(features)
 
         return predictions

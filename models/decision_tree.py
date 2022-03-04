@@ -6,10 +6,10 @@ import joblib
 from pathlib import Path
 from sklearn.metrics import classification_report
 from typing import List
+import operator
 
 
-class DecisionTreeClassifier(Classifier):
-
+class DTClassifier(Classifier):
     def __init__(self):
         self.train_files = []
         self.test_files = []
@@ -62,6 +62,9 @@ class DecisionTreeClassifier(Classifier):
         """
         self.model = DecisionTreeClassifier()
         self.model.fit(self.features, self.labels)
+        feature_importance = {feature_name: self.model.feature_importances_[i] for i, feature_name in
+         enumerate(self.vectorizer.get_feature_names())}
+        self.sorted_feature_importance = sorted(feature_importance.items(), key=operator.itemgetter(1), reverse=True)
 
     def save_model(self, model_path: Path) -> None:
         """
@@ -70,7 +73,7 @@ class DecisionTreeClassifier(Classifier):
        :param model_path: Path of the dictionary where the model will be saved
         """
 
-        joblib.dump(self.model, Path(model_path / 'lr.joblib.pkl'), compress=9)
+        joblib.dump(self.model, Path(model_path / 'dt.joblib.pkl'), compress=9)
 
     def load_model(self, model_path: Path) -> None:
         """
@@ -78,7 +81,7 @@ class DecisionTreeClassifier(Classifier):
 
         :param model_path: Path of the dictionary from where the model will be loaded
         """
-        self.model = joblib.load(Path(model_path / 'lr.joblib.pkl'))
+        self.model = joblib.load(Path(model_path / 'dt.joblib.pkl'))
 
     def predict_model(self) -> List:
         """

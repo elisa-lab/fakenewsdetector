@@ -70,7 +70,7 @@ class NaiveBayesClassifier(Classifier):
        :param model_path: Path of the dictionary where the model will be saved
         """
 
-        joblib.dump(self.model, Path(model_path / 'lr.joblib.pkl'), compress=9)
+        joblib.dump(self.model, Path(model_path / 'nb.joblib.pkl'), compress=9)
 
     def load_model(self, model_path: Path) -> None:
         """
@@ -78,7 +78,7 @@ class NaiveBayesClassifier(Classifier):
 
         :param model_path: Path of the dictionary from where the model will be loaded
         """
-        self.model = joblib.load(Path(model_path / 'lr.joblib.pkl'))
+        self.model = joblib.load(Path(model_path / 'nb.joblib.pkl'))
 
     def predict_model(self) -> List:
         """

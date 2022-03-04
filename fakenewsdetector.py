@@ -2,7 +2,7 @@ from pathlib import Path
 
 from models.logistic_regression import LogisticRegressionClassifier
 from models.naive_bayes import NaiveBayesClassifier
-from models.decision_tree import DecisionTreeClassifier
+from models.decision_tree import DTClassifier
 
 
 if __name__=='__main__':
@@ -57,7 +57,7 @@ if __name__=='__main__':
 
 
     # initialiaze the class
-    dc_model = DecisionTreeClassifier()
+    dc_model = DTClassifier()
 
     # adding the train and test files to the model
     dc_model.add_train_file(train_path)
